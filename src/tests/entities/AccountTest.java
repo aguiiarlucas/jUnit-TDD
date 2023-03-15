@@ -41,4 +41,21 @@ public class AccountTest {
         Assertions.assertEquals(res, initialBalance);
     }
 
+    @Test
+    public void withDrawShouldDecreaseBalanceWhenSufficientBalance(){
+        Account acc = AccountFactory.createAccount(800);
+        acc.whitdraw(400);
+        Assertions.assertEquals(400,acc.getBalance());
+
+    }
+
+    @Test
+    public void withDrawShouldThrowExceptionWhenInsufficientBalance(){
+
+        Assertions.assertThrows(IllegalArgumentException.class,()->{
+            Account acc = AccountFactory.createAccount(800);
+            acc.whitdraw(900);
+        });
+
+    }
 }
